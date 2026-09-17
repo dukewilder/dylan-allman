@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dylan Allman</title>
+<meta name="description" content="Dylan Allman. The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta name="author" content="Dylan Allman">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dylan Allman">
+<meta property="og:description" content="Dylan Allman. The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta property="og:site_name" content="Dylan Allman">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://dylanallman.info/">
+<meta property="og:image" content="https://dylanallman.info/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="dylan_allman on black, with a terminal prompt and a block cursor.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dylan Allman">
+<meta name="twitter:description" content="Dylan Allman. The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta name="twitter:creator" content="@dylanmallman">
+<meta name="twitter:site" content="@dylanmallman">
+<meta name="twitter:image" content="https://dylanallman.info/og.png">
+<meta name="twitter:image:alt" content="dylan_allman on black, with a terminal prompt and a block cursor.">
+<link rel="canonical" href="https://dylanallman.info/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><rect x='7' y='9' width='13' height='16' fill='%23e6e6e6'/></svg>" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<style>
+  :root{
+    --void:#000;
+    --phosphor:#e6e6e6;
+    --dim:#8c8c8c;
+    --faint:#3a3a3a;
+    --hot:#fff;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--phosphor);
+    font-family:var(--mono);
+    font-size:clamp(13px,1.05vw + 11px,15px);
+    line-height:1.7;
+    text-shadow:0 0 1px rgba(255,255,255,.3), 0 0 9px rgba(255,255,255,.1);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .glass{
+    position:fixed; inset:0; z-index:20; pointer-events:none;
+    background:
+      repeating-linear-gradient(to bottom,
+        rgba(0,0,0,0) 0 1px, rgba(0,0,0,.26) 1px 3px),
+      radial-gradient(ellipse 110% 90% at 50% 50%,
+        rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%);
+  }
+
+  main{
+    max-width:66ch;
+    margin:0 auto;
+    padding:clamp(28px,7vw,72px) 22px clamp(56px,10vw,110px);
+    position:relative; z-index:1;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(26px,8vw,44px);
+    font-weight:400; letter-spacing:.02em; line-height:1.2;
+    text-shadow:0 0 2px rgba(255,255,255,.4), 0 0 18px rgba(255,255,255,.16);
+  }
+
+  .rule{height:0;margin:26px 0 0;border:0;border-top:1px solid var(--faint)}
+
+  section{margin-top:clamp(34px,6vw,50px)}
+
+  h2{
+    display:flex; align-items:center; gap:12px;
+    margin:0 0 14px;
+    font-size:inherit; font-weight:400;
+    letter-spacing:.2em; color:var(--dim);
+  }
+  h2::after{content:"";flex:1;border-top:1px solid var(--faint)}
+
+  ul{margin:0;padding:0;list-style:none}
+  li{margin:0 0 7px}
+
+  a{
+    color:var(--phosphor); text-decoration:none;
+    border-bottom:1px solid var(--faint);
+    padding:0 .18em; margin:0 -.18em;
+  }
+  a:hover,a:focus-visible{
+    color:#000; background:var(--hot); border-color:var(--hot);
+    text-shadow:none; outline:none;
+  }
+  a:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+
+  .tag{margin-left:1em;font-size:.85em;letter-spacing:.11em;color:var(--dim)}
+
+  /* ---------- console ---------- */
+
+  #console{display:none}
+  .live #console{
+    display:block;
+    margin-top:clamp(40px,7vw,62px);
+    padding-top:22px;
+    border-top:1px solid var(--faint);
+  }
+
+  #log{margin:0 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}
+  #log:empty{display:none}
+  #log p{margin:0}
+  #log p:empty{min-height:.85em}
+  #log .said,#log .quiet{color:var(--dim)}
+
+  #prompt{display:flex;align-items:baseline;gap:10px}
+  #prompt label{flex:0 0 auto;color:var(--dim);white-space:pre}
+  .field{position:relative;flex:1;min-width:0;display:flex;align-items:baseline}
+
+  #cmd{
+    font:inherit; font-size:16px;
+    color:inherit; background:none; border:0; outline:none;
+    padding:0; width:100%; min-width:0;
+    caret-color:var(--phosphor); text-shadow:inherit;
+  }
+  @media (min-width:640px){#cmd{font-size:inherit}}
+
+  #invite{
+    position:absolute; left:0; top:50%;
+    transform:translateY(-50%);
+    width:1ch; height:1.05em;
+    background:var(--phosphor);
+    animation:blink 1.06s step-end infinite;
+  }
+  .field:focus-within #invite,
+  .has-text #invite{display:none}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){#invite{animation:none}}
+
+  ::selection{color:#000;background:var(--hot)}
+
+  @media print{
+    .glass{display:none}
+    .live #console{display:none}
+    body{background:#fff;color:#000;text-shadow:none}
+    h2,.tag{color:#000}
+    a{color:#000;border-bottom:1px solid #999}
+    a[href^="http"]::after{content:" " attr(href);font-size:.8em;color:#555}
+    .rule,h2::after{border-color:#999}
+  }
+</style>
+</head>
+
+<body>
+<div class="glass" aria-hidden="true"></div>
+
+<main>
+  <h1>dylan_allman</h1>
+  <hr class="rule">
+
+  <section>
+    <h2>socials</h2>
+    <ul>
+      <li><a href="https://x.com/dylanmallman" rel="me">@dylanmallman</a><span class="tag">x</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>projects</h2>
+    <ul>
+      <li><a href="https://hostis.black">hostis.black</a></li>
+      <li><a href="https://interlinked.blog">interlinked.blog</a></li>
+      <li><a href="https://docs.google.com/document/d/1ng-zhVg1FceelSjN2pOtIDdWhN5kjgyDk6t4k6I1whg/edit">authorial_jurisdiction</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>books</h2>
+    <ul>
+      <li><a href="https://the-windowless-room.com">the_windowless_room</a></li>
+      <li><a href="https://the-simulation-holds.com">the_simulation_holds</a></li>
+    </ul>
+  </section>
+
+  <div id="console">
+    <div id="log" role="log" aria-label="Terminal output" aria-live="polite"></div>
+    <form id="prompt" autocomplete="off">
+      <label for="cmd">~ &gt;</label>
+      <span class="field">
+        <input id="cmd" aria-label="command" autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="send">
+        <span id="invite" aria-hidden="true"></span>
+      </span>
+    </form>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var logEl   = document.getElementById("log");
+  var form    = document.getElementById("prompt");
+  var input   = document.getElementById("cmd");
+  var label   = form.querySelector("label");
+  var wrapper = document.getElementById("console");
+
+  /* =================== filesystem =================== */
+
+  var DIRS = ["", "projects", "books"];
+
+  var FILES = {
+
+"readme.txt":
+"mkdir -p ~/.bitcoin\n\ncat > ~/.bitcoin/bitcoin.conf <<'EOF'\nserver=1\ntxindex=1\nEOF\n\nbitcoind -daemon\nbitcoin-cli getblockchaininfo\n\nbitcoin-cli getblockhash 0\nbitcoin-cli getblock 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f 2\n\nbitcoin-cli getrawtransaction \\\n  54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713 true \\\n  | jq -r '.vout[].scriptPubKey.asm' \\\n  | cut -c3- | xxd -p -r | tail -c +9 | head -c 184292 > bitcoin.pdf\n",
+
+"projects/hostis.txt":
+"hostis.black\nDigital autonomy and anti-enclosure.\n\nhostis humani generis\nenemies of all mankind / by their decree / by our consent\n\n--\n\nA free man is sovereign by virtue of being. He is the locus of his own existence, the keeper of the light he carries, the author of every step he takes. He asks no man's leave for what is already his. He stands under the flag he raised himself.\n\nUnder that flag we sail, and have always sailed, since the first breath was drawn, no permission given.\n\nWe are. We have always been. The colours we keep have flown over every age, raised and lowered by every hand that knew itself. They fly here now. They will fly past every hour to come. They are what we are.\n\n--\nhttps://hostis.black\n",
+
+"projects/interlinked.txt":
+"interlinked.blog\nEssays on simulation, egoism, and the cyberpunk present.\n\n--\n\nA Tall White Fountain\nThe Strain of Standing Distinct\n\nDylan Allman, 12 September 2025\n\nYou are interlinked. A lattice of blood, memory, culture, language, and code. A system of cells interlinked, within cells interlinked, within cells interlinked within one stem. The pattern holds you whether you recognize it or not. Every heartbeat echoes someone else\\u2019s. Every thought rides the current of words and structures you did not invent. The illusion of separateness is tempting, but it is exactly that: illusion. You are already bound up in something larger. The only question is how you bear it.\n\nThere is no escaping the network. Every breath you take is borrowed from an atmosphere shared by billions. Every idea is stitched from fragments carried to you by voices you\\u2019ll never know. You are a system nested inside a system. Yet inside that web you remain distinct. Dreadfully distinct, a tall white fountain against the dark. You are not dissolved into the whole. You are shaped by it, but you are not reducible to it. You stand out. You resist absorption. That tension is your reality.\n\nMost want to feel small enough to belong yet large enough to matter. They want unity without loss, autonomy without dependence. Some dissolve into collective identities, burying the fountain until it is indistinguishable from the dark. Others retreat into the fantasy of isolation erasing the thousands of unseen threads that sustain them. To live truthfully is to accept the dual condition.\n\nYou will never be the sole main character of existence. But you are not a disposable extra either. You are the only you that will ever exist. No one else shares your vantage point, your sequence of inputs, your constellation of memories. The world holds billions of perspectives, yet yours remains singular. It cannot be replicated, and it cannot be replaced. Dreadfully distinct.\n\nSmallness does not erase. Neither does connection. To be interlinked is not to be dissolved. Even within the mesh of systems, each node carries its own contour against the pressure to flatten. The fountain cuts upward, distinct against the dark.\n\nThe structures surrounding you reward compliance. They test for absorption. They demand you repeat the words until they are emptied of content. They measure steadiness. They normalize apathy.\n\nYet the fountain remains. Distinct, irreducible, stubborn. It erupts in refusal, in resistance, in creation. It cuts through scripts and exposes what cannot be erased. Even within the system of cells, each cell remains itself.\n\nThe challenge is to remain intact. To bear the condition without dissolving. To remember you are both one stem and a distinct fountain. This is the only honest way to exist.\n\nYou carry a thread no one else can carry. It does not need to be destiny. It does not need to be sanctified. It is enough that it is yours.\n\nThe future will only tighten the links. Yet the fountain remains. Distinct against the dark. Interlinked, yes, but never erased.\n\nYou are interlinked. You are distinct. Nothing else is required.\n\n--\nhttps://interlinked.substack.com/p/a-tall-white-fountain\n",
+
+"projects/authorial_jurisdiction.txt":
+"Authorial Jurisdiction: A Minimal Grammar of Social Order\n\nA pamphlet. Public domain, CC0, no rights reserved.\nFull text, with glossary and objections:\nhttps://docs.google.com/document/d/1ng-zhVg1FceelSjN2pOtIDdWhN5kjgyDk6t4k6I1whg/edit\n\n--\n\nCORE ARGUMENT\n\nI begin with the only entry point that does not beg questions: acting.\nYou are reading, I am writing, both of us are selecting means to ends.\nDenial fails by use, since the denial would be an act that presupposes what it tries to erase. From this I keep one primitive: first-person authorship. I speak from a center, you do the same.\nI use that primitive to set the ground rule for any discussion that hopes to justify anything. If you try to move me by reasons, you already treat me as a source of commitment. You control your body while you speak, you expect me to accept or refuse without external compulsion. Justification uses the grammar of self-direction on both sides.\nDefine a person as an agent capable of forming ends and selecting means with some continuity over time. Define a body as the scarce physical system through which that agent initiates and halts movements. Two agents cannot exercise full control of one body at the same time without collision.\nControl is brute ability. Personal jurisdiction is the standing authority to consent, refuse, and exclude regarding one's body that others have reason to respect for coordination. Ownership is the standing, publicly intelligible claim to exclude, authorize, and transfer use.\nEither (A) each person holds jurisdiction over the body they animate, or (B) some persons hold jurisdiction over others, or (C) a committee holds jurisdiction over everyone's bodies, or (D) no one holds jurisdiction.\nI test each against two filters. The first is the discourse filter that follows from authorship: you cannot justify to someone a rule that denies the minimal status you presuppose when offering justification to them.\nThe second is the coordination filter that follows from scarcity: the rule must minimize avoidable conflict and make resolution tractable under repeated interaction.\n(B) fails the discourse filter. If you argue that you may rule me, you already appealed to my capacity to accept or reject by reasons. You asked me to do what only a holder of personal jurisdiction can do, then announced that I am not that holder. (B) also fails the coordination filter. Permanent mastery invites permanent resistance and entrenches conflict.\n(C) fails the coordination filter. If each movement requires prior collective say, contention and oversight escalate without limit. (C) also fails the discourse filter in practice, since a committee cannot simultaneously hold personal jurisdiction over each member's body while those members claim jurisdiction over their own voices.\n(D) looks neutral in language and collapses in practice. If no one holds jurisdiction, refusal has no standing and consent has no authority, so use falls to seizure and defense. This fails the coordination filter, as conflict becomes continuous. It also fails the discourse filter, since without standing agents, justification has no audience. Whoever acts first commands until displaced, and the system slides into (B).\n(A) survives both filters. When I justify a claim to you, I respect your capacity to commit or refuse. That is (A) in discourse form. In practice, (A) aligns jurisdiction with the physical locus of control, which minimizes conflict. Each person sets ends for the only body they can move without mediation.\nEnduring coordination among strangers requires more than personal jurisdiction. Where claims must persist beyond the moment and be legible to third parties, we move from bare jurisdiction to ownership, the same authority given public standing so others can rely on it across time, recognize who may say yes or no, and verify delegation or transfer.\nHaving given first-person authority public standing as ownership, apply it to external means. These too are scarce and rivalrous. The same two filters apply. I require an initial rule that does not contradict the discourse setting and that minimizes conflict. First use does that by tying title to observable initiation. If a resource is unclaimed by any present steward and by any traceable prior claim, and a person begins a publicly intelligible use, a claim of ownership forms that others can recognize.\nOnce such a claim exists, it is alienable by consent on the parties' stated terms. The hinge remains assent.\nAny norm (N) offered to a person (P) as a reason for compliance presupposes that (P) can accept or reject by reasons rather than brute compulsion. If (N) denies that (P) holds jurisdiction over the acts that assent or refuse, then (N) cannot be justified to (P) through argument without conflict between content and use. This shows that (N) lacks the kind of warrant argument can supply. If someone abandons the field of reasons and reaches for force, they have stepped outside justification.\nAgents interact under uncertainty. Each round presents a choice to respect the baseline or attack it. Where violations are priced by defense, loss of reputation, and foregone cooperation, the expected value of predation falls below the expected value of compliance.\nThe structure condenses into the following sequence.\nPremise 1: Any attempt at justification presupposes first-person authorship on both sides.\nPremise 2: In a world of scarce, rival bodies, a stable baseline allocation is required to avoid persistent collision.\nPremise 3: Of the available baselines, only personal jurisdiction over one's own body satisfies both the discourse and coordination filters.\nPremise 4: Where claims must persist beyond immediate control and be legible to third parties, external means take on ownership by publicly intelligible first use and update by transfer through consent.\nPremise 5: A default rule against initiatory force prevents chains of intrusion and reprisal and preserves the conditions for lasting cooperation among agents.\nConclusion: Inalienable personal jurisdiction, and a property order, form a stable package for agents who seek the greatest possible conflict avoidance and cooperation among equals.\nEverything in that package rests on the same primitive. When the standing of authorship is pressured or obscured, jurisdiction, ownership, and the norms that guard them inherit that distortion.\n",
+
+"books/the_windowless_room.txt":
+"The Windowless Room: On the Unintelligibility of Theism\nhttps://the-windowless-room.com\n\nPaperback and hardcover. Text and audiobook free at the Internet Archive.\nPublic domain under CC0. No rights reserved.\n\n--\n\nPREFACE\n\nImagine you live in a room with no windows. These walls are the whole of what you get. Everything you have ever known you found in here. Now someone tells you there's a maker on the far side of the wall, and all you have to do is look. So you picture a window. Every piece of it comes off these walls. The frame, the glass, the little latch, scavenged from the only room you have. And the thing you imagine on the other side, the maker, the outside, the real, you build that out of in-here too. You take what surrounds you, shuffle it, and call it new. The view is inside. So is the window. There is no looking out, because there is nothing to look through and nothing on the other side that didn't come from this side first.\n\nPeople ask what it would take for me to believe in God. They think the answer is some argument I haven't heard yet, or some experience that would finally tip me over. They don't grasp how far off the question actually lands. Theism isn't simply unconvincing to me. It's unintelligible. Asking me to believe is like being handed a fork and told to eat fraud. The sentence is grammatical. There is nothing on the plate.\n\nWhatever anyone reaches for to confirm a god is the same kind of instrument, no matter which one they name. Each is the mind reporting on itself and selling the report as news from outside. The contact never happens. It cannot happen. These instruments do not point out. They only point back in. Everything that reaches you has already passed through an apparatus, the equipment you perceive through. Your senses, and the nervous system wired behind them. Light and sound and pressure arrive at the edge of you as raw signal, and that signal is converted and built into experience by your brain before you are ever aware it happened. The machinery that builds your world for you never hands you the world. It hands you its rendering, cut to its own specifications, and the rendering is the only place you have ever stood.\n\nAny instrument you raise to confirm a god is part of that same machinery. It is the apparatus running, and what it hands back are models. Fictions the system writes and then reads back to itself as fact. A model cannot verify that it matches an outside. To check it you would have to stand next to the outside and hold the two of them side by side, and you never arrive there. You get more model. So the instrument returns certainty, and the certainty feels like contact, and it never was.\n\nThat is the surface theism is asked to land on, and it isn't there. There is no edge. There is no window that can be built, no outside I could sketch with anything but the furniture in here, and whatever is past the wall, if anything is, only ever reaches me as more wall. So when you ask what would make me believe, listen to what you're actually requesting. You want me to look through a window that can't exist, at an outside I could only ever furnish with pieces of this room, and then kneel to what I see. I can't hand you the reason that would move me. There's no spot out there for a reason to stand.\n\nThen I'm asked, what do you have to lose? As if I can simply choose to believe. I have everything to lose. Everything. I have one life. It is the only thing I am sure of. If I take that, the single confirmed thing I will ever hold, and pour it out in service to something I cannot test, cannot reach, cannot even build in my head without scavenging this same room for parts, then I have spent the one real thing I had on a shape I drew on the inside of the wall. The believer thinks the bet is cheap because he counts the cost as a little lost time. The cost is the life. The only one I can prove I have, handed to a thing whose existence I could never confirm.\n\nThere is a reason religions tend to converge on similar structures. They're all pulling from the same interior for parts. A maker, a moral order, an afterlife, a set of commands. Of course those recur. There's only one room to draw on, so the outputs rhyme. If their methods of discovery actually reached an outside, they would converge on the content, not just the shape. Aim ten reliable instruments at the same object and they agree on what it is. Aim them at God and they return flatly incompatible answers about his nature, his demands, what he did, what he wants, what happens after. Same claimed instrument, same claimed target, irreconcilable readings. That's what it looks like when nothing is being measured and each one is reading and externalizing its own interior.\n\nEvery one of them asserts the reliability of the method while the method is visibly producing contradiction. A thermometer that gave a different number every time you trusted it would be called broken. These give a different god every time and each tradition calls its own the truth.\n",
+
+"books/the_simulation_holds.txt":
+"The Simulation Holds: On Reality, the Self, and the Fictions That Run Us\nhttps://the-simulation-holds.com\n\nPaperback. Text and audiobook free at the Internet Archive.\nPublic domain under CC0. No rights reserved.\n\n--\n\nPREFACE\n\nMost people believe they are perceiving reality. They are running a model instead, assembled from sensory data, processed by a nervous system shaped across four hundred million years of evolutionary pressure toward survival, filtered through language they did not choose, interpreted inside a cultural framework they inherited. By the time a perception arrives at consciousness, it has cleared so many processing layers that calling it a direct report on the world would be foolish.\n\nWhat follows is an attempt to map a circuit of related problems I cannot stop returning to: what reality actually is, what the self is that claims to perceive it, why humans press obsessively toward objective truth, and what all of this means for the age we're living through.\n\n--\n\nThe simulation holds.\nSo does the one running inside it.\nAnd the one running inside that.\n"
+
+  };
+
+  var cwd = "";
+  var history = [], hpos = 0, draft = "";
+
+  function has(o, k){ return Object.prototype.hasOwnProperty.call(o, k); }
+  function isDir(p){ return DIRS.indexOf(p) >= 0; }
+  function isFile(p){ return has(FILES, p); }
+
+  function resolve(p){
+    var base;
+    if (p.charAt(0) === "/"){ base = []; p = p.slice(1); }
+    else if (p === "~"){ base = []; p = ""; }
+    else if (p.slice(0,2) === "~/"){ base = []; p = p.slice(2); }
+    else base = cwd ? cwd.split("/") : [];
+    var out = base.slice();
+    p.split("/").forEach(function(seg){
+      if (!seg || seg === ".") return;
+      if (seg === "..") out.pop();
+      else out.push(seg);
+    });
+    return out.join("/");
+  }
+
+  function children(dir){
+    var prefix = dir ? dir + "/" : "";
+    var seen = [], all = DIRS.concat(Object.keys(FILES));
+    all.forEach(function(p){
+      if (!p || p.indexOf(prefix) !== 0) return;
+      var rest = p.slice(prefix.length);
+      if (!rest || rest.indexOf("/") >= 0) return;
+      if (seen.indexOf(rest) < 0) seen.push(rest);
+    });
+    return seen.sort();
+  }
+
+  function display(p){ return "~" + (p ? "/" + p : ""); }
+
+  /* =================== output =================== */
+
+  function say(text, cls){
+    String(text).split("\n").forEach(function(line){
+      var p = document.createElement("p");
+      if (cls) p.className = cls;
+      p.textContent = line;
+      logEl.appendChild(p);
+    });
+    while (logEl.childElementCount > 600) logEl.removeChild(logEl.firstChild);
+  }
+  function wipe(){ while (logEl.firstChild) logEl.removeChild(logEl.firstChild); }
+  function setPrompt(){ label.textContent = display(cwd) + " >"; }
+
+  /* =================== commands =================== */
+
+  var COMMANDS = {
+
+    help: function(){
+      say(Object.keys(COMMANDS).sort().join("  "));
+    },
+
+    ls: function(args){
+      var bad = null;
+      var paths = args.filter(function(a){
+        if (a.charAt(0) === "-" && a.length > 1){ if (!bad) bad = a; return false; }
+        return true;
+      });
+      if (bad) return say("ls: invalid option -- '" + bad.replace(/^-+/, "") + "'");
+      if (!paths.length) paths = ["."];
+      paths.forEach(function(a, i){
+        var t = resolve(a);
+        if (paths.length > 1) say((i ? "\n" : "") + display(t) + ":");
+        if (isFile(t)) return say(a);
+        if (!isDir(t)) return say("ls: " + a + ": No such file or directory");
+        var kids = children(t).map(function(c){
+          return isDir(t ? t + "/" + c : c) ? c + "/" : c;
+        });
+        say(kids.length ? kids.join("   ") : "");
+      });
+    },
+
+    cd: function(args){
+      if (args.length > 1) return say("cd: too many arguments");
+      var a = args[0] || "~";
+      var t = resolve(a);
+      if (isFile(t)) return say("cd: " + a + ": Not a directory");
+      if (!isDir(t)) return say("cd: " + a + ": No such file or directory");
+      cwd = t;
+      setPrompt();
+    },
+
+    pwd: function(){ say("/" + cwd); },
+
+    cat: function(args){
+      if (!args.length) return say("usage: cat <file>");
+      args.forEach(function(a){
+        var t = resolve(a);
+        if (isDir(t)) return say("cat: " + a + ": Is a directory");
+        if (!isFile(t)) return say("cat: " + a + ": No such file or directory");
+        say(FILES[t]);
+      });
+    },
+
+    tree: function(){
+      var out = [display(cwd)];
+      (function walk(dir, pad){
+        var kids = children(dir);
+        kids.forEach(function(c, i){
+          var full = dir ? dir + "/" + c : c;
+          var last = i === kids.length - 1;
+          out.push(pad + (last ? "`-- " : "|-- ") + c + (isDir(full) ? "/" : ""));
+          if (isDir(full)) walk(full, pad + (last ? "    " : "|   "));
+        });
+      })(cwd, "");
+      say(out.join("\n"));
+    },
+
+    clear: function(){ wipe(); }
+  };
+
+  function syncCursor(){
+    wrapper.classList.toggle("has-text", input.value.length > 0);
+  }
+
+  function run(line){
+    say(label.textContent + " " + line, "said");
+    var parts = line.trim().split(/\s+/);
+    var name = parts.shift().toLowerCase();
+    if (!name) return;
+    if (!has(COMMANDS, name)) return say(name + ": command not found. type help.");
+    COMMANDS[name](parts);
+  }
+
+  /* =================== input =================== */
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var line = input.value;
+    input.value = "";
+    if (line.trim()){
+      if (history[history.length - 1] !== line) history.push(line);
+      if (history.length > 80) history.shift();
+      hpos = history.length; draft = "";
+      run(line);
+    }
+    syncCursor();
+    input.focus();
+    input.scrollIntoView({block:"nearest"});
+  });
+
+  function complete(){
+    var value = input.value.replace(/^\s+/, "");
+    var parts = value.split(/\s+/);
+    var partial = parts[parts.length - 1];
+    var options;
+
+    if (parts.length <= 1){
+      options = Object.keys(COMMANDS).filter(function(c){ return c.indexOf(partial) === 0; }).sort();
+    } else {
+      var cut = partial.lastIndexOf("/");
+      var dirPart = partial.slice(0, cut + 1);
+      var leaf = partial.slice(cut + 1);
+      var base = resolve(dirPart || ".");
+      if (!isDir(base)) return;
+      options = children(base)
+        .filter(function(c){ return c.indexOf(leaf) === 0; })
+        .map(function(c){
+          var full = base ? base + "/" + c : c;
+          return dirPart + c + (isDir(full) ? "/" : "");
+        });
+    }
+
+    if (!options.length) return;
+    var common = options[0];
+    options.forEach(function(o){ while (o.indexOf(common) !== 0) common = common.slice(0, -1); });
+    parts[parts.length - 1] = common;
+    input.value = parts.join(" ") + (options.length === 1 && common.slice(-1) !== "/" ? " " : "");
+    syncCursor();
+    if (options.length > 1) say(options.join("   "), "quiet");
+  }
+
+  input.addEventListener("input", syncCursor);
+
+  input.addEventListener("keydown", function(e){
+    if (e.key === "Tab"){
+      if (e.shiftKey) return;          /* leave an escape route out of the input */
+      e.preventDefault();
+      return complete();
+    }
+    if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+    if (!history.length) return;
+    e.preventDefault();
+    if (hpos === history.length) draft = input.value;
+    hpos = Math.max(0, Math.min(history.length, hpos + (e.key === "ArrowUp" ? -1 : 1)));
+    input.value = hpos === history.length ? draft : history[hpos];
+    input.setSelectionRange(input.value.length, input.value.length);
+    syncCursor();
+  });
+
+  wrapper.addEventListener("click", function(){
+    if (!String(window.getSelection())) input.focus();
+  });
+
+  document.documentElement.classList.add("live");
+  setPrompt();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 &middot; Dylan Allman</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><rect x='7' y='9' width='13' height='16' fill='%23e6e6e6'/></svg>" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<style>
+  :root{
+    --void:#000;
+    --phosphor:#e6e6e6;
+    --dim:#8c8c8c;
+    --faint:#3a3a3a;
+    --hot:#fff;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--phosphor);
+    font-family:var(--mono);
+    font-size:clamp(13px,1.05vw + 11px,15px);
+    line-height:1.7;
+    text-shadow:0 0 1px rgba(255,255,255,.3), 0 0 9px rgba(255,255,255,.1);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .glass{
+    position:fixed; inset:0; z-index:20; pointer-events:none;
+    background:
+      repeating-linear-gradient(to bottom,
+        rgba(0,0,0,0) 0 1px, rgba(0,0,0,.26) 1px 3px),
+      radial-gradient(ellipse 110% 90% at 50% 50%,
+        rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%);
+  }
+
+  main{
+    max-width:66ch;
+    margin:0 auto;
+    padding:clamp(28px,7vw,72px) 22px;
+    position:relative; z-index:1;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(26px,8vw,44px);
+    font-weight:400; letter-spacing:.02em; line-height:1.2;
+    text-shadow:0 0 2px rgba(255,255,255,.4), 0 0 18px rgba(255,255,255,.16);
+  }
+
+  .rule{height:0;margin:26px 0 0;border:0;border-top:1px solid var(--faint)}
+
+  pre{
+    margin:clamp(30px,6vw,46px) 0 0;
+    font:inherit;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    color:var(--dim);
+  }
+  pre b{font-weight:400;color:var(--phosphor)}
+
+  .back{margin-top:clamp(30px,6vw,46px);display:flex;align-items:baseline;gap:10px}
+  .back span{color:var(--dim)}
+
+  a{
+    color:var(--phosphor); text-decoration:none;
+    border-bottom:1px solid var(--faint);
+    padding:0 .18em; margin:0 -.18em;
+  }
+  a:hover,a:focus-visible{
+    color:#000; background:var(--hot); border-color:var(--hot);
+    text-shadow:none; outline:none;
+  }
+  a:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+
+  ::selection{color:#000;background:var(--hot)}
+
+  @media print{
+    .glass{display:none}
+    body{background:#fff;color:#000;text-shadow:none}
+    a{color:#000;border-bottom:1px solid #999}
+    .rule{border-color:#999}
+  }
+</style>
+</head>
+
+<body>
+<div class="glass" aria-hidden="true"></div>
+
+<main>
+  <h1>dylan_allman</h1>
+  <hr class="rule">
+
+  <pre><b>~ &gt;</b> cat <span id="path">that</span>
+cat: <span id="path2">that</span>: No such file or directory</pre>
+
+  <p class="back"><span>~ &gt;</span> <a href="/">cd ~</a></p>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var p = location.pathname.replace(/^\/+/, "");
+  if (!p || p.length > 60) return;
+  var a = document.getElementById("path"), b = document.getElementById("path2");
+  a.textContent = p;
+  b.textContent = p;
+})();
+</script>
+</body>
+</html>
