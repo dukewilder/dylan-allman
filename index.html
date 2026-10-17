@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dylan Allman</title>
-<meta name="description" content="Dylan Allman. AI Fear Report, The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta name="description" content="Dylan Allman. The Windowless Room, The Simulation Holds, HOSTIS, AI Fear Report, The Black Breviary, NODUS, Interlinked, and Authorial Jurisdiction.">
 <meta name="author" content="Dylan Allman">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dylan Allman">
-<meta property="og:description" content="Dylan Allman. AI Fear Report, The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta property="og:description" content="Dylan Allman. The Windowless Room, The Simulation Holds, HOSTIS, AI Fear Report, The Black Breviary, NODUS, Interlinked, and Authorial Jurisdiction.">
 <meta property="og:site_name" content="Dylan Allman">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://dylanallman.info/">
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="dylan_allman on black, with a terminal prompt and a block cursor.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dylan Allman">
-<meta name="twitter:description" content="Dylan Allman. AI Fear Report, The Windowless Room, The Simulation Holds, Interlinked, and HOSTIS.">
+<meta name="twitter:description" content="Dylan Allman. The Windowless Room, The Simulation Holds, HOSTIS, AI Fear Report, The Black Breviary, NODUS, Interlinked, and Authorial Jurisdiction.">
 <meta name="twitter:creator" content="@dylanmallman">
 <meta name="twitter:site" content="@dylanmallman">
 <meta name="twitter:image" content="https://dylanallman.info/og.png">
@@ -213,10 +213,10 @@
   var FILES = {
 
 "projects/blackbreviary.txt":
-"blackbreviary.app\n\n--\nhttps://blackbreviary.app\n",
+"blackbreviary.app\nA daily devotion to the self.\n\nA Satanic book of hours for those who have left a faith or never had one. Each day: an engraving, a reading, a rite, and a question.\n\n--\nhttps://blackbreviary.app\n",
 
 "projects/nodusarchive.txt":
-"nodusarchive.net\n\n--\nhttps://nodusarchive.net\n",
+"nodusarchive.net\nOn the east of Eden.\n\nAn archive for the city of Nodus, the city where the sky opened at 03:12 in the morning. Its history, its powers and people, a map, and the Origin Files.\n\n--\nhttps://nodusarchive.net\n",
 
 "readme.txt":
 "mkdir -p ~/.bitcoin\n\ncat > ~/.bitcoin/bitcoin.conf <<'EOF'\nserver=1\ntxindex=1\nEOF\n\nbitcoind -daemon\nbitcoin-cli getblockchaininfo\n\nbitcoin-cli getblockhash 0\nbitcoin-cli getblock 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f 2\n\nbitcoin-cli getrawtransaction \\\n  54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713 true \\\n  | jq -r '.vout[].scriptPubKey.asm' \\\n  | cut -c3- | xxd -p -r | tail -c +9 | head -c 184292 > bitcoin.pdf\n",
