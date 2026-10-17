@@ -160,25 +160,27 @@
   <section>
     <h2>socials/</h2>
     <ul>
-      <li><a href="https://x.com/dylanmallman" rel="me">@dylanmallman</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>projects/</h2>
-    <ul>
-      <li><a href="https://aifearreport.com">aifearreport.com</a></li>
-      <li><a href="https://hostis.black">hostis.black</a></li>
-      <li><a href="https://interlinked.blog">interlinked.blog</a></li>
-      <li><a href="https://docs.google.com/document/d/1ng-zhVg1FceelSjN2pOtIDdWhN5kjgyDk6t4k6I1whg/edit">authorial_jurisdiction</a></li>
+      <li><a href="https://x.com/dylanmallman" rel="me noopener noreferrer" target="_blank">@dylanmallman</a></li>
     </ul>
   </section>
 
   <section>
     <h2>books/</h2>
     <ul>
-      <li><a href="https://the-windowless-room.com">the_windowless_room</a></li>
-      <li><a href="https://the-simulation-holds.com">the_simulation_holds</a></li>
+      <li><a href="https://the-windowless-room.com" target="_blank" rel="noopener noreferrer">the_windowless_room</a></li>
+      <li><a href="https://the-simulation-holds.com" target="_blank" rel="noopener noreferrer">the_simulation_holds</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>projects/</h2>
+    <ul>
+      <li><a href="https://hostis.black" target="_blank" rel="noopener noreferrer">hostis.black</a></li>
+      <li><a href="https://aifearreport.com" target="_blank" rel="noopener noreferrer">aifearreport.com</a></li>
+      <li><a href="https://blackbreviary.app/" target="_blank" rel="noopener noreferrer">blackbreviary.app</a></li>
+      <li><a href="https://nodusarchive.net/" target="_blank" rel="noopener noreferrer">nodusarchive.net</a></li>
+      <li><a href="https://interlinked.blog" target="_blank" rel="noopener noreferrer">interlinked.blog</a></li>
+      <li><a href="https://docs.google.com/document/d/1ng-zhVg1FceelSjN2pOtIDdWhN5kjgyDk6t4k6I1whg/edit" target="_blank" rel="noopener noreferrer">authorial_jurisdiction</a></li>
     </ul>
   </section>
 
@@ -206,9 +208,15 @@
 
   /* =================== filesystem =================== */
 
-  var DIRS = ["", "projects", "books"];
+  var DIRS = ["", "books", "projects"];
 
   var FILES = {
+
+"projects/blackbreviary.txt":
+"blackbreviary.app\n\n--\nhttps://blackbreviary.app\n",
+
+"projects/nodusarchive.txt":
+"nodusarchive.net\n\n--\nhttps://nodusarchive.net\n",
 
 "readme.txt":
 "mkdir -p ~/.bitcoin\n\ncat > ~/.bitcoin/bitcoin.conf <<'EOF'\nserver=1\ntxindex=1\nEOF\n\nbitcoind -daemon\nbitcoin-cli getblockchaininfo\n\nbitcoin-cli getblockhash 0\nbitcoin-cli getblock 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f 2\n\nbitcoin-cli getrawtransaction \\\n  54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713 true \\\n  | jq -r '.vout[].scriptPubKey.asm' \\\n  | cut -c3- | xxd -p -r | tail -c +9 | head -c 184292 > bitcoin.pdf\n",
