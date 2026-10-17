@@ -122,19 +122,21 @@
     font:inherit; font-size:16px;
     color:inherit; background:none; border:0; outline:none;
     padding:0; width:100%; min-width:0;
-    caret-color:var(--phosphor); text-shadow:inherit;
+    caret-color:transparent; text-shadow:inherit;
   }
   @media (min-width:640px){#cmd{font-size:inherit}}
 
   #invite{
     position:absolute; left:0; top:50%;
     transform:translateY(-50%);
+    font:inherit; font-size:16px;
     width:1ch; height:1.05em;
     background:var(--phosphor);
+    mix-blend-mode:difference;
+    pointer-events:none;
     animation:blink 1.06s step-end infinite;
   }
-  .field:focus-within #invite,
-  .has-text #invite{display:none}
+  @media (min-width:640px){#invite{font-size:inherit}}
   @keyframes blink{50%{opacity:0}}
   @media (prefers-reduced-motion:reduce){#invite{animation:none}}
 
@@ -355,8 +357,21 @@
     clear: function(){ wipe(); }
   };
 
+  var invite = document.getElementById("invite");
+
+  function placeCursor(){
+    var pos = input.selectionEnd == null ? input.value.length : input.selectionEnd;
+    var x = pos * invite.offsetWidth - input.scrollLeft;
+    invite.style.left = Math.max(0, x) + "px";
+    invite.style.display = x > input.clientWidth ? "none" : "";
+    invite.style.animation = "none";
+    void invite.offsetWidth;
+    invite.style.animation = "";
+  }
+
   function syncCursor(){
     wrapper.classList.toggle("has-text", input.value.length > 0);
+    placeCursor();
   }
 
   function run(line){
@@ -417,6 +432,9 @@
   }
 
   input.addEventListener("input", syncCursor);
+  ["keyup","click","select","focus"].forEach(function(ev){
+    input.addEventListener(ev, function(){ setTimeout(placeCursor, 0); });
+  });
 
   input.addEventListener("keydown", function(e){
     if (e.key === "Tab"){
